@@ -27,7 +27,7 @@ public class PostController {
     List<Post> posts = postService.findAll();
     model.addAttribute("posts", posts);
 
-    return "posts/list"; // Changed from "post/list" to "posts/list"
+    return "posts/list"; // Changed from "post/list" to "posts/list!"
   }
 
   @GetMapping("/{id}")
