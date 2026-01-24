@@ -37,10 +37,16 @@ public class SecurityConfig {
         .headers(headers -> headers
             .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
         .csrf(AbstractHttpConfigurer::disable)
-        .formLogin(AbstractHttpConfigurer::disable)
-        .sessionManagement(session -> session
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        .cors(cors -> cors.configurationSource(corsConfigurationSource()));
+        .formLogin(form -> form
+                .loginPage("/member/login") //
+                .loginProcessingUrl("/member/login")
+                .defaultSuccessUrl("/")
+                .permitAll()
+        ).logout(logout -> logout
+                    .logoutUrl("/member/logout")
+                    .logoutSuccessUrl("/")
+                    .permitAll()
+            ).cors(cors -> cors.configurationSource(corsConfigurationSource()));
 
     return http.build();
   }

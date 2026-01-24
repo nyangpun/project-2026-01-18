@@ -2,6 +2,7 @@ package com.backend.domain.member.entity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
+import com.backend.base.entity.QBaseEntity;
 import com.backend.domain.memeber.entity.Member;
 import com.querydsl.core.types.dsl.*;
 
@@ -20,7 +21,7 @@ public class QMember extends EntityPathBase<Member> {
 
     public static final QMember member = new QMember("member1");
 
-    public final com.base.entity.QBaseEntity _super = new com.base.entity.QBaseEntity(this);
+    public final QBaseEntity _super = new QBaseEntity(this);
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createDate = _super.createDate;

@@ -50,12 +50,30 @@ public class MemberService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         // 사용자 조회
-        Member member = memberRepository.findByEmail(email).get();
+        Member member = memberRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("email not found: " + email));
+
 
         // 권한 설정
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("member"));
 
         return new User(member.getEmail(), member.getPassword(), authorities);
+    }
+
+    public Member join(String username, String password, String email) {
+        Member member = Member.builder()
+                .username(username)
+                .password(password)
+                .email(email)
+                .build();
+
+        memberRepository.save(member);
+
+        return member;
+    }
+
+    // SELECT COUNT(*) FROM `member`;
+    public long count() {
+        return memberRepository.count();
     }
 }

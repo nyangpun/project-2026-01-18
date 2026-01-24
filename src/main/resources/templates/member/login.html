@@ -1,0 +1,57 @@
+<html layout:decorate="~{layouts/default_layout.html}">
+<body>
+<section class="login-section" layout:fragment="content">
+    <h1 class="text-2xl font-bold">로그인</h1>
+
+    <form th:action method="POST" onsubmit="LoginForm__submit(this); return false;">
+        <fieldset class="fieldset">
+            <legend class="fieldset-legend">아이디</legend>
+            <label class="input validator">
+                <input
+                        type="text"
+                        required
+                        placeholder="아이디를 입력해주세요."
+                        title="input email"
+                        name="username"
+                />
+            </label>
+        </fieldset>
+        <fieldset class="fieldset">
+            <legend class="fieldset-legend">비밀번호</legend>
+            <label class="input validator">
+                <input
+                        type="password"
+                        required
+                        placeholder="비밀번호를 입력해주세요."
+                        title="input password"
+                        name="password"
+                />
+            </label>
+        </fieldset>
+        <div>
+            <button type="submit" class="btn btn-neutral">로그인</button>
+        </div>
+    </form>
+</section>
+
+<script>
+    function LoginForm__submit(form) {
+      form.email.value = form.email.value.trim();
+      if(form.email.value.length === 0) {
+        alert("아이디를 입력해주세요.");
+        form.email.focus();
+        return;
+      }
+
+      form.password.value = form.password.value.trim();
+      if(form.password.value.length === 0) {
+        alert("비밀번호를 입력해주세요.");
+        form.password.focus();
+        return;
+      }
+
+      form.submit();
+    }
+</script>
+</body>
+</html>

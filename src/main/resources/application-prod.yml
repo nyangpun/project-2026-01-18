@@ -6,10 +6,10 @@ spring:
       username: ${custom.prod.redis.username}
       password: ${custom.prod.redis.password}
   datasource:
-    url: jdbc:postgresql://sangwon7242-db-1.internal:5432/app1
-    username: postgres
-    password: ${custom.prod.db.password}
-    driver-class-name: org.postgresql.Driver
+    url: jdbc:h2:./db_dev;MODE=MySQL # 파일 DB
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
     hikari:
       auto-commit: false
   jpa:

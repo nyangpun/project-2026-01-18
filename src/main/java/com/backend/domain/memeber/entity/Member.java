@@ -1,6 +1,6 @@
 package com.backend.domain.memeber.entity;
 
-import com.base.config.entity.BaseEntity;
+import com.backend.base.config.entity.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.*;
@@ -12,7 +12,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(callSuper = true) // BaseEntity의 toString()도 호출
+@ToString(callSuper = true)
 public class Member extends BaseEntity {
     @Column(unique = true)
     private String username;

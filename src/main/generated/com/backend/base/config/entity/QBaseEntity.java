@@ -1,24 +1,25 @@
-package com.base.entity;
+package com.backend.base.config.entity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
-import com.backend.memeber.entity.BaseEntity;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.processing.Generated;
 import com.querydsl.core.types.Path;
 
-import java.time.LocalDateTime;
 
+/**
+ * QBaseEntity is a Querydsl query type for BaseEntity
+ */
 @Generated("com.querydsl.codegen.DefaultSupertypeSerializer")
 public class QBaseEntity extends EntityPathBase<BaseEntity> {
 
-    private static final long serialVersionUID = 1126094843L;
+    private static final long serialVersionUID = 602944873L;
 
     public static final QBaseEntity baseEntity = new QBaseEntity("baseEntity");
 
-    public final DateTimePath<LocalDateTime> createDate = createDateTime("createDate", java.time.LocalDateTime.class);
+    public final DateTimePath<java.time.LocalDateTime> createDate = createDateTime("createDate", java.time.LocalDateTime.class);
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
@@ -37,3 +38,4 @@ public class QBaseEntity extends EntityPathBase<BaseEntity> {
     }
 
 }
+

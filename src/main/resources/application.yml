@@ -22,10 +22,10 @@ spring:
     cache: false
     prefix: file:src/main/resources/templates/ # 템플릿 파일 경로
   datasource:
-    url: jdbc:mariadb://127.0.0.1:3306/project_dev?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul # 파일 DB
-    username: root
+    url: jdbc:h2:./db_dev;MODE=MySQL # 파일 DB
+    username: sa
     password:
-    driver-class-name: org.mariadb.jdbc.Driver
+    driver-class-name: org.h2.Driver
     hikari:
       auto-commit: false
   jpa:
