@@ -1,4 +1,4 @@
-package com.backend.domain.memeber.from;
+package com.backend.domain.memeber.form;
 
 import lombok.Getter;
 import lombok.Setter;

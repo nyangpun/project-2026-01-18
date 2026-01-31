@@ -1,7 +1,7 @@
 package com.backend.domain.memeber.service;
 
 import com.backend.domain.memeber.entity.Member;
-import com.backend.domain.memeber.from.MemberJoinForm;
+import com.backend.domain.memeber.form.MemberJoinForm;
 import com.backend.domain.memeber.repository.MemberRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,7 +13,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;

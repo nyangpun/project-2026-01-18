@@ -26,8 +26,7 @@ public class QMember extends EntityPathBase<Member> {
 
     public final StringPath email = createString("email");
 
-    //inherited
-    public final NumberPath<Long> id = _super.id;
+    public final NumberPath<Long> id = createNumber("id", Long.class);
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> modifyDate = _super.modifyDate;

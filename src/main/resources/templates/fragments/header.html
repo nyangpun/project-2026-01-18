@@ -10,6 +10,7 @@
         <nav>
             <a th:href="@{/}">홈으로</a>
             <a th:href="@{/posts/list}">게시물 리스트</a>
+            <a th:href="@{/review/list}">리뷰 리스트</a>
             <a th:href="@{/member/join}">회원가입</a>
             <div sec:authorize="isAuthenticated()">
                 <a th:href="@{/member/logout}">로그아웃</a>

@@ -1,16 +1,17 @@
-<html layout:decorate="~{layouts/default_layout.html}">
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <body>
 <section class="login-section" layout:fragment="content">
     <h1 class="text-2xl font-bold">로그인</h1>
 
     <form th:action method="POST" onsubmit="LoginForm__submit(this); return false;">
         <fieldset class="fieldset">
-            <legend class="fieldset-legend">아이디</legend>
+            <legend class="fieldset-legend">이메일</legend>
             <label class="input validator">
                 <input
-                        type="text"
+                        type="email"
                         required
-                        placeholder="아이디를 입력해주세요."
+                        placeholder="이메일을 입력해주세요."
                         title="input email"
                         name="username"
                 />
@@ -42,10 +43,10 @@
 
 <script>
     function LoginForm__submit(form) {
-      form.email.value = form.email.value.trim();
-      if(form.email.value.length === 0) {
-        alert("아이디를 입력해주세요.");
-        form.email.focus();
+      form.username.value = form.username.value.trim();
+      if(form.username.value.length === 0) {
+        alert("이메일을 입력해주세요.");
+        form.username.focus();
         return;
       }
 

@@ -3,6 +3,7 @@ package com.backend.domain.memeber.entity;
 import com.backend.global.base.config.entity.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -14,6 +15,8 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @ToString(callSuper = true)
 public class Member extends BaseEntity {
+    @Id
+    private Long id;
     @Column(unique = true)
     private String username;
     private String password;

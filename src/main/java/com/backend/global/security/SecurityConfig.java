@@ -48,7 +48,7 @@ public class SecurityConfig {
         .formLogin(form -> form
                 .loginPage("/member/login") //
                 .loginProcessingUrl("/member/login")
-                .defaultSuccessUrl("/")
+                .defaultSuccessUrl("/member/loginsuccess")
                 .permitAll()
         ).oauth2Login(oauth2 -> oauth2
                     .loginPage("/member/login")
