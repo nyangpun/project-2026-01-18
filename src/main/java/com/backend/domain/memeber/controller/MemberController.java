@@ -31,7 +31,7 @@ public class MemberController {
         Member oldMember = memberService.getMemberByEmail(email);
 
         if (oldMember != null) {
-            return "redirect:/?errorMsg=Already exists email";
+            return "redirect:/member/joinOldmember";
         }
 
         Member member = memberService.join(memberJoinForm);
@@ -44,6 +44,11 @@ public class MemberController {
         }
 
         return "redirect:/";
+    }
+
+    @GetMapping("/joinOldmember")
+    public String joinOldmember() {
+        return "member/joinOldmember";
     }
 
     @GetMapping("/login")
