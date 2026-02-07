@@ -21,7 +21,11 @@ public class GameController {
     @GetMapping("/sync")
     public String syncFromSteamSpy() {
         gameService.syncAllFromSteamSpy();
-        return "redirect:/"; // 원하는 페이지로 리다이렉트
+        return "redirect:/";
     }
-
+    @GetMapping("/filltags")
+    public String filltags() {
+        gameService.filltags();
+        return "redirect:/";
+    }
 }

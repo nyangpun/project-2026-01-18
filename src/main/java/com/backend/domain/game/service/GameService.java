@@ -18,15 +18,15 @@ import java.util.stream.Collectors;
 public class GameService {
     private final GameRepository gameRepository;
     private final WebClient webClient;
-    private static final String Url = "https://steamspy.com/api.php?request=all";
+    private static final String Url = "https://steamspy.com/api.php?request=all&languages=Korean";
+    private static final String Url2 = "https://steamspy.com/api.php?request=appdetails&appid={appid}";
 
     @Transactional
     public void syncAllFromSteamSpy() {
         Map<String, gamedto> map = webClient.get()
                 .uri(Url)
                 .retrieve()
-                .bodyToMono(new ParameterizedTypeReference<Map<String, gamedto>>() {
-                })
+                .bodyToMono(new ParameterizedTypeReference<Map<String, gamedto>>() {})
                 .block();
 
         if (map == null || map.isEmpty()) {
@@ -43,11 +43,6 @@ public class GameService {
 
     private Game toEntity(gamedto dto) {
         String tagString = null;
-        if (dto.getTags() != null && !dto.getTags().isEmpty()) {
-            tagString = dto.getTags().keySet().stream()
-                    .sorted()
-                    .collect(Collectors.joining(","));
-        }
 
         return Game.builder()
                 .appid(dto.getAppid())
@@ -56,5 +51,32 @@ public class GameService {
                 .publisher(dto.getPublisher())
                 .tag(tagString)
                 .build();
+    }
+
+    @Transactional
+    public void filltags() {
+        List<Game> gameTagisNull = gameRepository.findByTagIsNull();
+
+        for(Game game : gameTagisNull) {
+            String tagString = findtags(game.getAppid());
+            if(tagString == null) {
+                continue;
+            }
+            game.setTag(tagString);
+        }
+    }
+
+    private String findtags(long appid) {
+        gamedto dto = webClient.get()
+                .uri(Url2, appid)
+                .retrieve()
+                .bodyToMono(gamedto.class)
+                .block();
+
+        return dto.getTags().keySet().stream()
+                .map(String::trim)
+                .filter(s -> !s.isEmpty())
+                .sorted()
+                .collect(Collectors.joining(","));
     }
 }
