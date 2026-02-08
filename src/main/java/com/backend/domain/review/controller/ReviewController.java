@@ -26,25 +26,18 @@ public class ReviewController {
     @GetMapping("/list")
     public String getReviews(Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "25") int size){
         Page<Game> gamePage = this.gameService.getGamePage(page -1, size);
-        /*
-        List<Review> reviews = reviewService.findAll();
-        List<Game> games = gameRepository.findAll();
-        model.addAttribute("review", reviews);
-        model.addAttribute("game", games);
-         */
         model.addAttribute("gamePage", gamePage);
 
         return "review/list";
     }
 
     @GetMapping("/game/{gameId}")
-    public String listReviewsByGame(@PathVariable Long gameId, Model model) {
+    public String listReviewsByGame(@PathVariable Long gameId, Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "25") int size) {
         Game game = gameRepository.findById(gameId).orElse(null);
-
-        List<Review> reviews = reviewService.findByGameId(gameId);
+        Page<Review> reviewPage = this.reviewService.getReviewWithPaging(gameId,page -1, size);
 
         model.addAttribute("game", game);
-        model.addAttribute("reviews", reviews);
+        model.addAttribute("reviewPage", reviewPage);
 
         return "review/gameReviews";
     }

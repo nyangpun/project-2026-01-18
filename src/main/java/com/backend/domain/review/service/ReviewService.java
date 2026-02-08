@@ -32,8 +32,9 @@ public class ReviewService {
 
     public List<Review> findByGameId(long gameId) {return reviewRepository.findByGameId(gameId);}
 
-    public Page<Review> getReviewWithPaging(int page, int size) {
+    public Page<Review> getReviewWithPaging(Long gameId, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
-        return reviewRepository.findAll(pageable);
+        return reviewRepository.findByGameId(gameId, pageable);
     }
+
 }

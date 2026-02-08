@@ -9,5 +9,6 @@ import java.util.List;
 
 public interface ReviewRepository extends JpaRepository<Review, Long> {
     List<Review> findByGameId(Long gameId);
-    Page<Review> findAll(Pageable pageable);
+    Page<Review> findByGameId(Long gameId, Pageable pageable);
+
 }

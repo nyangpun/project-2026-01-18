@@ -9,9 +9,9 @@
 </head>
 <body>
 <section>
-    <p th:if="${#lists.isEmpty(reviews)}">아직 등록된 리뷰가 없습니다.</p>
-    <ul th:if="${!#lists.isEmpty(reviews)}">
-        <li th:each="r : ${reviews}">
+    <p th:if="${reviewPage == null}">아직 등록된 리뷰가 없습니다.</p>
+    <ul th:if="${reviewPage != null}">
+        <li th:each="r : ${reviewPage.content}">
             <span th:text="'[' + ${r.score} + '점] ' + ${r.content}">
             [점수] 리뷰 내용
           </span>
@@ -21,6 +21,21 @@
     </ul>
     <div>
     <a th:href="@{/review/write(gameId=${game.id})}">리뷰작성</a>
+    </div>
+    <div>
+        <a th:if="${reviewPage.hasPrevious()}"
+           th:href="@{|/review/list?page=${reviewPage.number}|}">
+            이전
+        </a>
+
+        <span th:text="${reviewPage.number + 1}">1</span>
+        /
+        <span th:text="${reviewPage.totalPages}">1</span>
+
+        <a th:if="${reviewPage.hasNext()}"
+           th:href="@{|/review/list?page=${reviewPage.number + 2}|}">
+            다음
+        </a>
     </div>
     <a th:href="@{/review/list}">목록으로 돌아가기</a>
 </section>
