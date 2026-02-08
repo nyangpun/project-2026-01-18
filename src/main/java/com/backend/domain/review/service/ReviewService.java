@@ -3,6 +3,9 @@ package com.backend.domain.review.service;
 import com.backend.domain.review.entity.Review;
 import com.backend.domain.review.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,4 +31,9 @@ public class ReviewService {
     public Review findById(long id){return reviewRepository.findById(id).orElse(null);}
 
     public List<Review> findByGameId(long gameId) {return reviewRepository.findByGameId(gameId);}
+
+    public Page<Review> getReviewWithPaging(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return reviewRepository.findAll(pageable);
+    }
 }

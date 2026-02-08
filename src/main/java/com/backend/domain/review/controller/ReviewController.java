@@ -7,6 +7,7 @@ import com.backend.domain.review.entity.Review;
 import com.backend.domain.review.form.ReviewForm;
 import com.backend.domain.review.service.ReviewService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,14 +20,19 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ReviewController {
     private final ReviewService reviewService;
+    private final GameService gameService;
     private final GameRepository gameRepository;
 
     @GetMapping("/list")
-    public String getReviews(Model model){
+    public String getReviews(Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "25") int size){
+        Page<Game> gamePage = this.gameService.getGamePage(page -1, size);
+        /*
         List<Review> reviews = reviewService.findAll();
         List<Game> games = gameRepository.findAll();
         model.addAttribute("review", reviews);
         model.addAttribute("game", games);
+         */
+        model.addAttribute("gamePage", gamePage);
 
         return "review/list";
     }

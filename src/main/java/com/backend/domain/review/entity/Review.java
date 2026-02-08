@@ -2,7 +2,6 @@ package com.backend.domain.review.entity;
 
 import com.backend.global.base.config.entity.BaseEntity;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 

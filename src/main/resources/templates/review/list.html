@@ -12,14 +12,30 @@
       <h1>리뷰 목록</h1>
       <p>이 페이지는 게임 목록을 표시합니다.</p>
       <ul>
-        <li th:each="g : ${game}">
+        <li th:each="g : ${gamePage.content}">
           <a
-            th:href="@{/review/game/{game.id}(game.id=${g.id})}"
+            th:href="@{|/review/game/${g.Id}|}"
             th:text="${g.name}"
-            >게임 이름</a
+          >게임 이름</a
           >
         </li>
       </ul>
+      <div>
+        <a th:if="${gamePage.hasPrevious()}"
+           th:href="@{|/review/list?page=${gamePage.number}|}">
+          이전
+        </a>
+
+        <span th:text="${gamePage.number + 1}">1</span>
+        /
+        <span th:text="${gamePage.totalPages}">1</span>
+
+        <a th:if="${gamePage.hasNext()}"
+           th:href="@{|/review/list?page=${gamePage.number + 2}|}">
+          다음
+        </a>
+      </div>
+
     </section>
   </body>
 </html>

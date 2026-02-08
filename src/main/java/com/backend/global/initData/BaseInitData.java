@@ -55,6 +55,4 @@ public class BaseInitData {
     reviewService.writeReview("내용2", 3, 2L);
     reviewService.writeReview("내용3", 1, 1L);
   }
-
-
 }

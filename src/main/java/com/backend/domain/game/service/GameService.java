@@ -5,6 +5,9 @@ import com.backend.domain.game.entity.Game;
 import com.backend.domain.game.repository.GameRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -83,4 +86,10 @@ public class GameService {
     public List<Game> getAllgames() {
         return gameRepository.findAll();
     }
+
+    public Page<Game> getGamePage(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return gameRepository.findAll(pageable);
+    }
+
 }

@@ -1,15 +1,12 @@
 package com.backend.domain.game.controller;
 
-import com.backend.domain.game.dto.gamedto;
 import com.backend.domain.game.entity.Game;
 import com.backend.domain.game.service.GameService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
