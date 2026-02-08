@@ -64,7 +64,7 @@ public class ReviewController {
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/write")
     public String write(ReviewForm review){
-        reviewService.writeReview(review.getContent(), review.getScore());
+        reviewService.writeReview(review.getContent(), review.getScore(), review.getGametitle());
         return "redirect:/review/list";
     }
 }

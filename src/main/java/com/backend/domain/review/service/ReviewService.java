@@ -16,10 +16,11 @@ public class ReviewService {
         return reviewRepository.count();
     }
 
-    public void writeReview(String content, int score){
+    public void writeReview(String content, int score, int gametitle){
         Review review = Review.builder()
                 .content(content)
                 .score(score)
+                .gametitle(gametitle)
                 .build();
         reviewRepository.save(review);
     }

@@ -1,0 +1,26 @@
+<!doctype html>
+<html
+        lang="ko"
+        xmlns:th="http://www.thymeleaf.org"
+        th:replace="~{layouts/default_layout :: layout(~{::title}, ~{::section})}"
+>
+<head>
+    <title>리뷰 목록</title>
+</head>
+<body>
+<section>
+    <p th:if="${#lists.isEmpty(reviews)}">아직 등록된 리뷰가 없습니다.</p>
+    <ul th:if="${!#lists.isEmpty(reviews)}">
+        <li th:each="r : ${reviews}">
+            <span th:text="'[' + ${r.score} + '점] ' + ${r.content}">
+            [점수] 리뷰 내용
+          </span>
+        </li>
+
+        </li>
+    </ul>
+
+    <a th:href="@{/review/list}">목록으로 돌아가기</a>
+</section>
+</body>
+</html>

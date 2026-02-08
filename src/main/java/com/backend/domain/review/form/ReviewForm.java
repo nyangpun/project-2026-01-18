@@ -8,4 +8,5 @@ import lombok.Setter;
 public class ReviewForm {
     private String content;
     private int score;
+    private int gametitle;
 }
