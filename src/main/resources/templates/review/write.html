@@ -16,6 +16,9 @@
         th:object="${reviewForm}"
         method="post"
       >
+
+        <input type="hidden" th:field="*{gameId}" />
+
         <div>
           <label for="content">내용</label><br />
           <textarea

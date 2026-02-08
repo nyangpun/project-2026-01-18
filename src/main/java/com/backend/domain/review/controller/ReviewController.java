@@ -10,10 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -56,15 +53,17 @@ public class ReviewController {
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/write")
-    public String showWrite(Model model){
-        model.addAttribute("reviewForm", new ReviewForm());
+    public String showWrite(@RequestParam Long gameId, Model model){
+        ReviewForm reviewForm = new ReviewForm();
+        reviewForm.setGameId(gameId);
+        model.addAttribute("reviewForm", reviewForm);
         return "review/write";
     }
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/write")
     public String write(ReviewForm review){
-        reviewService.writeReview(review.getContent(), review.getScore(), review.getGametitle());
-        return "redirect:/review/list";
+        reviewService.writeReview(review.getContent(), review.getScore(), review.getGameId());
+        return "redirect:/review/game/" + review.getGameId();
     }
 }

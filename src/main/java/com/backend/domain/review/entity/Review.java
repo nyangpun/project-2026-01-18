@@ -17,5 +17,5 @@ public class Review extends BaseEntity {
     private String content;
     private int userId;
     private int score;
-    private int gametitle;
+    private Long gameId;
 }

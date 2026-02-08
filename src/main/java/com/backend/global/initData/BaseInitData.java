@@ -51,9 +51,9 @@ public class BaseInitData {
     if (reviewService.count() > 0)
       return;
 
-    reviewService.writeReview("내용1", 5, 1);
-    reviewService.writeReview("내용2", 3, 2);
-    reviewService.writeReview("내용3", 1, 1);
+    reviewService.writeReview("내용1", 5, 1L);
+    reviewService.writeReview("내용2", 3, 2L);
+    reviewService.writeReview("내용3", 1, 1L);
   }
 
 

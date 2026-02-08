@@ -16,16 +16,16 @@ public class ReviewService {
         return reviewRepository.count();
     }
 
-    public void writeReview(String content, int score, int gametitle){
+    public void writeReview(String content, int score, Long gameId){
         Review review = Review.builder()
                 .content(content)
                 .score(score)
-                .gametitle(gametitle)
+                .gameId(gameId)
                 .build();
         reviewRepository.save(review);
     }
 
     public Review findById(long id){return reviewRepository.findById(id).orElse(null);}
 
-    public List<Review> findByGameId(long gameId) {return reviewRepository.findByGametitle((int) gameId);}
+    public List<Review> findByGameId(long gameId) {return reviewRepository.findByGameId(gameId);}
 }

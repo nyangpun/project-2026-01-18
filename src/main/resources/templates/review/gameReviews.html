@@ -19,7 +19,9 @@
 
         </li>
     </ul>
-
+    <div>
+    <a th:href="@{/review/write(gameId=${game.id})}">리뷰작성</a>
+    </div>
     <a th:href="@{/review/list}">목록으로 돌아가기</a>
 </section>
 </body>
