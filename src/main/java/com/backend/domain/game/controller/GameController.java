@@ -1,15 +1,14 @@
 package com.backend.domain.game.controller;
 
 import com.backend.domain.game.dto.gamedto;
+import com.backend.domain.game.entity.Game;
 import com.backend.domain.game.service.GameService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.Mapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -27,5 +26,12 @@ public class GameController {
     public String filltags() {
         gameService.filltags();
         return "redirect:/";
+    }
+
+    //임시
+    @GetMapping("/list")
+    @ResponseBody
+    public List<Game> getAllGames(){
+        return gameService.getAllgames();
     }
 }

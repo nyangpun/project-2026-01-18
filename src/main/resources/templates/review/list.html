@@ -12,11 +12,11 @@
       <h1>리뷰 목록</h1>
       <p>이 페이지는 리뷰 목록을 표시합니다.</p>
       <ul>
-        <li th:each="review : ${review}">
+        <li th:each="g : ${game}">
           <a
-            th:href="@{/review/{id}(id=${review.id})}"
-            th:text="${review.content}"
-            >리뷰 제목</a
+            th:href="@{/review/game/{game.id}(game.id=${g.id})}"
+            th:text="${g.name}"
+            >게임 이름</a
           >
         </li>
       </ul>

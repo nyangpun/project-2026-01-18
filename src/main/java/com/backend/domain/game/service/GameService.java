@@ -79,4 +79,8 @@ public class GameService {
                 .sorted()
                 .collect(Collectors.joining(","));
     }
+
+    public List<Game> getAllgames() {
+        return gameRepository.findAll();
+    }
 }

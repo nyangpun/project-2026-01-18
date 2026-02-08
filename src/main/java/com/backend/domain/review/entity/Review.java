@@ -14,8 +14,6 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @ToString(callSuper = true)
 public class Review extends BaseEntity {
-    @Id
-    private Long id;
     private String content;
     private int userId;
     private int score;

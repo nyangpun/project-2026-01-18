@@ -23,5 +23,8 @@ public class ReviewService {
                 .build();
         reviewRepository.save(review);
     }
+
     public Review findById(long id){return reviewRepository.findById(id).orElse(null);}
+
+    public List<Review> findByGameId(long gameId) {return reviewRepository.findByGametitle((int) gameId);}
 }
