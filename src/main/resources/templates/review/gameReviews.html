@@ -24,7 +24,7 @@
     </div>
     <div>
         <a th:if="${reviewPage.hasPrevious()}"
-           th:href="@{|/review/list?page=${reviewPage.number}|}">
+           th:href="@{|/review/game/${game.id}?page=${reviewPage.number}|}">
             이전
         </a>
 
@@ -33,7 +33,7 @@
         <span th:text="${reviewPage.totalPages}">1</span>
 
         <a th:if="${reviewPage.hasNext()}"
-           th:href="@{|/review/list?page=${reviewPage.number + 2}|}">
+           th:href="@{|/review/game/${game.id}?page=${reviewPage.number + 2}|}">
             다음
         </a>
     </div>

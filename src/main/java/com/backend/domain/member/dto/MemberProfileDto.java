@@ -1,6 +1,6 @@
-package com.backend.domain.memeber.dto;
+package com.backend.domain.member.dto;
 
-import com.backend.domain.memeber.entity.Member;
+import com.backend.domain.member.entity.Member;
 
 public record MemberProfileDto(String username, String email) {
     public static MemberProfileDto from(Member member) {

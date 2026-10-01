@@ -1,6 +1,6 @@
 package com.backend.global.initData;
 
-import com.backend.domain.memeber.service.MemberService;
+import com.backend.domain.member.service.MemberService;
 import com.backend.domain.review.entity.Review;
 import com.backend.domain.review.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package com.backend.global.security.dto;
 
-import com.backend.domain.memeber.entity.Member;
+import com.backend.domain.member.entity.Member;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;

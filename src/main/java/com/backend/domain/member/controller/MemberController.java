@@ -1,9 +1,9 @@
-package com.backend.domain.memeber.controller;
+package com.backend.domain.member.controller;
 
-import com.backend.domain.memeber.dto.MemberProfileDto;
-import com.backend.domain.memeber.entity.Member;
-import com.backend.domain.memeber.form.MemberJoinForm;
-import com.backend.domain.memeber.service.MemberService;
+import com.backend.domain.member.dto.MemberProfileDto;
+import com.backend.domain.member.entity.Member;
+import com.backend.domain.member.form.MemberJoinForm;
+import com.backend.domain.member.service.MemberService;
 import com.backend.global.security.dto.MemberContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

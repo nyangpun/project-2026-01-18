@@ -14,7 +14,7 @@
       <ul>
         <li th:each="g : ${gamePage.content}">
           <a
-            th:href="@{|/review/game/${g.Id}|}"
+            th:href="@{|/review/game/${g.id}|}"
             th:text="${g.name}"
           >게임 이름</a
           >

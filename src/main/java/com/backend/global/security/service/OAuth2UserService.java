@@ -1,11 +1,11 @@
 package com.backend.global.security.service;
 
-import com.backend.domain.memeber.entity.Member;
-import com.backend.domain.memeber.repository.MemberRepository;
-import com.backend.domain.memeber.service.MemberService;
+import com.backend.domain.member.entity.Member;
+import com.backend.domain.member.repository.MemberRepository;
+import com.backend.domain.member.service.MemberService;
 import com.backend.global.security.dto.MemberContext;
 import com.backend.global.security.exception.OAuthTypeMatchNotFoundException;
-import com.backend.domain.memeber.exception.MemberNotFoundException;
+import com.backend.domain.member.exception.MemberNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;

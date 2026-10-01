@@ -1,6 +1,6 @@
 package com.backend.global.initData;
 
-import com.backend.domain.memeber.service.MemberService;
+import com.backend.domain.member.service.MemberService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

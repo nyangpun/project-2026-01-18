@@ -1,4 +1,4 @@
-package com.backend.domain.memeber.entity;
+package com.backend.domain.member.entity;
 
 import com.backend.global.base.config.entity.BaseEntity;
 import jakarta.persistence.Column;

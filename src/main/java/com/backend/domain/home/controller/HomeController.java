@@ -1,7 +1,7 @@
 package com.backend.domain.home.controller;
 
-import com.backend.domain.memeber.entity.Member;
-import com.backend.domain.memeber.service.MemberService;
+import com.backend.domain.member.entity.Member;
+import com.backend.domain.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

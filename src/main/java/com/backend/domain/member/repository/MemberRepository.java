@@ -1,6 +1,6 @@
-package com.backend.domain.memeber.repository;
+package com.backend.domain.member.repository;
 
-import com.backend.domain.memeber.entity.Member;
+import com.backend.domain.member.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

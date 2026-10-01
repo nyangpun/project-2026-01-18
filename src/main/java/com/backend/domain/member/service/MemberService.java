@@ -1,8 +1,8 @@
-package com.backend.domain.memeber.service;
+package com.backend.domain.member.service;
 
-import com.backend.domain.memeber.entity.Member;
-import com.backend.domain.memeber.form.MemberJoinForm;
-import com.backend.domain.memeber.repository.MemberRepository;
+import com.backend.domain.member.entity.Member;
+import com.backend.domain.member.form.MemberJoinForm;
+import com.backend.domain.member.repository.MemberRepository;
 import com.backend.global.security.dto.MemberContext;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
