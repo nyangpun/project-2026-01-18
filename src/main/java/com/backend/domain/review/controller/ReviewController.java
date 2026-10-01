@@ -3,6 +3,7 @@ package com.backend.domain.review.controller;
 import com.backend.domain.game.entity.Game;
 import com.backend.domain.game.repository.GameRepository;
 import com.backend.domain.game.service.GameService;
+import com.backend.domain.review.dto.ReviewDetailDto;
 import com.backend.domain.review.entity.Review;
 import com.backend.domain.review.form.ReviewForm;
 import com.backend.domain.review.service.ReviewService;
@@ -48,7 +49,7 @@ public class ReviewController {
     @GetMapping("/{id}")
     public String detail(@PathVariable long id, Model model){
         Review review = reviewService.findById(id);
-        model.addAttribute("review", review);
+        model.addAttribute("review", ReviewDetailDto.from(review));
         return "review/detail";
     }
 

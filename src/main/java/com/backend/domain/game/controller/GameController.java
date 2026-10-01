@@ -1,6 +1,6 @@
 package com.backend.domain.game.controller;
 
-import com.backend.domain.game.entity.Game;
+import com.backend.domain.game.dto.GameResponseDto;
 import com.backend.domain.game.service.GameService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -28,7 +28,7 @@ public class GameController {
     //임시
     @GetMapping("/list")
     @ResponseBody
-    public List<Game> getAllGames(){
-        return gameService.getAllgames();
+    public List<GameResponseDto> getAllGames(){
+        return gameService.getAllgames().stream().map(GameResponseDto::from).toList();
     }
 }

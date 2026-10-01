@@ -1,5 +1,6 @@
 package com.backend.domain.memeber.controller;
 
+import com.backend.domain.memeber.dto.MemberProfileDto;
 import com.backend.domain.memeber.entity.Member;
 import com.backend.domain.memeber.form.MemberJoinForm;
 import com.backend.domain.memeber.service.MemberService;
@@ -61,7 +62,7 @@ public class MemberController {
     @GetMapping("/profile")
     public String showProfile(@AuthenticationPrincipal MemberContext memberContext, Model model) {
         Member member = memberService.getMemberByEmail(memberContext.getEmail());
-        model.addAttribute("member", member);
+        model.addAttribute("member", MemberProfileDto.from(member));
         return "member/profile";
     }
 
