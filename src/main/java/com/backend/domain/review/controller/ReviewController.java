@@ -6,9 +6,11 @@ import com.backend.domain.game.service.GameService;
 import com.backend.domain.review.entity.Review;
 import com.backend.domain.review.form.ReviewForm;
 import com.backend.domain.review.service.ReviewService;
+import com.backend.global.security.dto.MemberContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -61,8 +63,8 @@ public class ReviewController {
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/write")
-    public String write(ReviewForm review){
-        reviewService.writeReview(review.getContent(), review.getScore(), review.getGameId());
+    public String write(ReviewForm review, @AuthenticationPrincipal MemberContext memberContext){
+        reviewService.writeReview(review.getContent(), review.getScore(), review.getGameId(), memberContext.getId());
         return "redirect:/review/game/" + review.getGameId();
     }
 }

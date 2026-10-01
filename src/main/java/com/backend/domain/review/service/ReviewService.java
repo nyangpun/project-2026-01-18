@@ -19,11 +19,12 @@ public class ReviewService {
         return reviewRepository.count();
     }
 
-    public void writeReview(String content, int score, Long gameId){
+    public void writeReview(String content, int score, Long gameId, Long userId){
         Review review = Review.builder()
                 .content(content)
                 .score(score)
                 .gameId(gameId)
+                .userId(userId)
                 .build();
         reviewRepository.save(review);
     }
