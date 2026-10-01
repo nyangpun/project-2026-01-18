@@ -1,10 +1,9 @@
 package com.backend.global.security;
 
 import com.backend.global.security.service.OAuth2UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
@@ -27,11 +26,10 @@ import com.backend.global.app.AppConfig;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 
-  @Lazy
-  @Autowired
-  private OAuth2UserService OAuth2UserService;
+  private final OAuth2UserService OAuth2UserService;
 
   @Bean
   public SecurityFilterChain baseSecurityFilterChain(HttpSecurity http) throws Exception {
