@@ -22,4 +22,6 @@ public class Member extends BaseEntity {
     private String password;
     @Column(unique = true)
     private String email;
+    @Builder.Default
+    private String role = "USER";
 }

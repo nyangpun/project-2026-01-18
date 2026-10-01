@@ -56,7 +56,7 @@ public class MemberService implements UserDetailsService {
 
         // 권한 설정
         List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("member"));
+        authorities.add(new SimpleGrantedAuthority("ROLE_" + member.getRole()));
 
         return new MemberContext(member, authorities);
     }

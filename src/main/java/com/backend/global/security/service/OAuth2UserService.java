@@ -76,7 +76,7 @@ public class OAuth2UserService extends DefaultOAuth2UserService {
     }
 
     List<GrantedAuthority> authorities = new ArrayList<>();
-    authorities.add(new SimpleGrantedAuthority("member"));
+    authorities.add(new SimpleGrantedAuthority("ROLE_" + member.getRole()));
     return new MemberContext(member, authorities, attributes, userNameAttributeName);
   }
 
@@ -97,7 +97,7 @@ public class OAuth2UserService extends DefaultOAuth2UserService {
     }
 
       List<GrantedAuthority> authorities = new ArrayList<>();
-      authorities.add(new SimpleGrantedAuthority("member"));
+      authorities.add(new SimpleGrantedAuthority("ROLE_" + member.getRole()));
       return new MemberContext(member, authorities, attributes, userNameAttributeName);
   }
 }

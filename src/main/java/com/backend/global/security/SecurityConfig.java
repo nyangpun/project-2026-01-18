@@ -39,6 +39,7 @@ public class SecurityConfig {
             .requestMatchers(HttpMethod.GET, "/api/*/posts/{id:\\d+}").permitAll()
             .requestMatchers(HttpMethod.GET, "/api/*/posts").permitAll()
             .requestMatchers("/api/*/**").authenticated()
+            .requestMatchers("/admin/**").hasRole("ADMIN")
             .anyRequest().permitAll())
         .headers(headers -> headers
             .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
