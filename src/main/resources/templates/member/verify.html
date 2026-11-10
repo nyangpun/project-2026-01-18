@@ -1,0 +1,23 @@
+<!doctype html>
+<html
+  lang="ko"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{layouts/default_layout :: layout(~{::title}, ~{::section})}"
+>
+  <head>
+    <title>이메일 인증</title>
+  </head>
+  <body>
+    <section>
+      <h1 class="text-2xl font-bold">이메일 인증</h1>
+      <p th:text="${message}">메시지</p>
+
+      <form th:if="${showResend}" th:action="@{/member/verify/resend}" method="post">
+        <input type="email" name="email" required placeholder="이메일을 입력해주세요." />
+        <button type="submit" class="btn btn-neutral">인증 메일 다시 받기</button>
+      </form>
+
+      <a th:href="@{/member/login}">로그인하러 가기</a>
+    </section>
+  </body>
+</html>

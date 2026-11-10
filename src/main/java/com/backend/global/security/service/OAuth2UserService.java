@@ -70,6 +70,7 @@ public class OAuth2UserService extends DefaultOAuth2UserService {
               .email(email)
               .username(username)
               .password("")
+              .emailVerified(true)
               .build();
 
       memberRepository.save(member);
@@ -91,6 +92,7 @@ public class OAuth2UserService extends DefaultOAuth2UserService {
               .email(email)
               .username(username)
               .password("")
+              .emailVerified(true)
               .build();
 
       memberRepository.save(member);

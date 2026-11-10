@@ -45,6 +45,15 @@ spring:
   thymeleaf:
     cache: false
     prefix: file:src/main/resources/templates/ # 템플릿 파일 경로
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
   datasource:
     url: jdbc:h2:./db_dev;MODE=MySQL # 파일 DB
     username: sa

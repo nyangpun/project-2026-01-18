@@ -19,7 +19,7 @@ public class MemberContext extends User implements OAuth2User {
     private String userNameAttributeName;
 
     public MemberContext(Member member, List<GrantedAuthority> authorities) {
-        super(member.getUsername(), member.getPassword(), authorities);
+        super(member.getUsername(), member.getPassword(), member.isEmailVerified(), true, true, true, authorities);
         this.id = member.getId();
         this.email = member.getEmail();
     }

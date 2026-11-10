@@ -24,4 +24,7 @@ public class Member extends BaseEntity {
     private String email;
     @Builder.Default
     private String role = "USER";
+    @Builder.Default
+    @Column(columnDefinition = "boolean default false")
+    private boolean emailVerified = false;
 }
