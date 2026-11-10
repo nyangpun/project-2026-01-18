@@ -1,5 +1,6 @@
 package com.backend.domain.search.service;
 
+import com.backend.domain.search.dto.RecentSearchDto;
 import com.backend.domain.search.entity.RecentSearch;
 import com.backend.domain.search.repository.RecentSearchRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +31,7 @@ public class RecentSearchService {
         }
     }
 
-    public List<RecentSearch> findRecent(Long userId) {
-        return recentSearchRepository.findTop10ByUserIdOrderByIdDesc(userId);
+    public List<RecentSearchDto> findRecent(Long userId) {
+        return recentSearchRepository.findTop10ByUserIdOrderByIdDesc(userId).stream().map(RecentSearchDto::from).toList();
     }
 }
