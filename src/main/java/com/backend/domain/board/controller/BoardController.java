@@ -7,10 +7,12 @@ import com.backend.domain.board.service.BoardService;
 import com.backend.domain.post.dto.PostDto;
 import com.backend.domain.post.service.PostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @Controller
 @RequestMapping("/board")
@@ -28,6 +30,9 @@ public class BoardController {
     @GetMapping("/{boardId}")
     public String detail(@PathVariable long boardId, Model model) {
         Board board = boardService.findById(boardId);
+        if (board == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
         model.addAttribute("board", BoardDto.from(board));
         model.addAttribute("posts", postService.findByBoardId(boardId).stream().map(PostDto::from).toList());
         return "board/detail";

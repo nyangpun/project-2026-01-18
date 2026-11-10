@@ -10,11 +10,13 @@ import com.backend.domain.review.service.ReviewService;
 import com.backend.global.security.dto.MemberContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -37,6 +39,9 @@ public class ReviewController {
     @GetMapping("/game/{gameId}")
     public String listReviewsByGame(@PathVariable Long gameId, Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "25") int size) {
         Game game = gameRepository.findById(gameId).orElse(null);
+        if (game == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
         Page<Review> reviewPage = this.reviewService.getReviewWithPaging(gameId,page -1, size);
 
         model.addAttribute("game", game);
@@ -49,6 +54,9 @@ public class ReviewController {
     @GetMapping("/{id}")
     public String detail(@PathVariable long id, Model model){
         Review review = reviewService.findById(id);
+        if (review == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
         model.addAttribute("review", ReviewDetailDto.from(review));
         return "review/detail";
     }
