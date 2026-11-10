@@ -1,4 +1,4 @@
-package com.backend.domain.post.post.entity;
+package com.backend.domain.post.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,4 +23,6 @@ public class Post {
   private Long id;
   private String title;
   private String content;
+  private Long boardId;
+  private Long userId;
 }

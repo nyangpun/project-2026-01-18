@@ -1,0 +1,33 @@
+<!doctype html>
+<html
+  lang="ko"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{layouts/default_layout :: layout(~{::title}, ~{::section})}"
+>
+  <head>
+    <title>글쓰기</title>
+  </head>
+  <body>
+    <section>
+      <h1>글쓰기</h1>
+
+      <form
+        th:action="@{|/board/${boardId}/post/write|}"
+        th:object="${postForm}"
+        method="post"
+      >
+        <div>
+          <label for="title">제목</label><br />
+          <input id="title" type="text" th:field="*{title}" />
+        </div>
+        <div>
+          <label for="content">내용</label><br />
+          <textarea id="content" th:field="*{content}" rows="10" cols="40"></textarea>
+        </div>
+        <div>
+          <button type="submit">등록</button>
+        </div>
+      </form>
+    </section>
+  </body>
+</html>

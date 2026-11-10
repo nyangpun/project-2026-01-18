@@ -13,37 +13,23 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.backend.domain.post.post.service.PostService;
-
 @Configuration
 public class BaseInitData {
-  private final PostService postService;
   private final ReviewService reviewService;
 
   @Autowired
   @Lazy
   private BaseInitData self;
 
-  public BaseInitData(PostService postService, ReviewService reviewService) {
-    this.postService = postService;
+  public BaseInitData(ReviewService reviewService) {
     this.reviewService = reviewService;
   }
 
   @Bean
   public ApplicationRunner baseInitDataApplicationRunner() {
     return args -> {
-      self.work1();
       self.work2();
     };
-  }
-
-  @Transactional
-  public void work1() {
-    if (postService.count() > 0)
-      return;
-
-    postService.write("제목 1", "내용 1");
-    postService.write("제목 2", "내용 2");
   }
 
   @Transactional

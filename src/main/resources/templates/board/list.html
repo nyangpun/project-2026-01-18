@@ -1,0 +1,24 @@
+<!doctype html>
+<html
+  lang="ko"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{layouts/default_layout :: layout(~{::title}, ~{::section})}"
+>
+  <head>
+    <title>게시판 목록</title>
+  </head>
+  <body>
+    <section>
+      <h1>게시판 목록</h1>
+      <p th:if="${boards.isEmpty()}">아직 등록된 게시판이 없습니다.</p>
+      <ul>
+        <li th:each="b : ${boards}">
+          <a th:href="@{|/board/${b.id}|}" th:text="${b.title}">게시판 제목</a>
+        </li>
+      </ul>
+      <div sec:authorize="hasRole('ADMIN')">
+        <a th:href="@{/board/new}">게시판 만들기</a>
+      </div>
+    </section>
+  </body>
+</html>

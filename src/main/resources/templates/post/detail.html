@@ -1,0 +1,25 @@
+<!doctype html>
+<html
+  lang="ko"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{layouts/default_layout :: layout(~{::title}, ~{::section})}"
+>
+  <head>
+    <title>게시글</title>
+  </head>
+  <body>
+    <section>
+      <h2 th:text="${post.title}">게시글 제목</h2>
+      <p th:text="${post.content}">게시글 내용</p>
+
+      <div th:if="${isAuthor}">
+        <a th:href="@{|/board/${post.boardId}/post/${post.id}/modify|}">수정</a>
+        <form th:action="@{|/board/${post.boardId}/post/${post.id}/delete|}" method="post">
+          <button type="submit">삭제</button>
+        </form>
+      </div>
+
+      <a th:href="@{|/board/${post.boardId}|}">목록으로 돌아가기</a>
+    </section>
+  </body>
+</html>

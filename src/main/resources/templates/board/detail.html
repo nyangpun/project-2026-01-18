@@ -1,0 +1,25 @@
+<!doctype html>
+<html
+  lang="ko"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{layouts/default_layout :: layout(~{::title}, ~{::section})}"
+>
+  <head>
+    <title>게시판</title>
+  </head>
+  <body>
+    <section>
+      <h1 th:text="${board.title}">게시판 제목</h1>
+      <p th:if="${posts.isEmpty()}">아직 등록된 게시글이 없습니다.</p>
+      <ul>
+        <li th:each="p : ${posts}">
+          <a th:href="@{|/board/${board.id}/post/${p.id}|}" th:text="${p.title}">게시글 제목</a>
+        </li>
+      </ul>
+      <div>
+        <a th:href="@{|/board/${board.id}/post/write|}">글쓰기</a>
+      </div>
+      <a th:href="@{/board/list}">목록으로 돌아가기</a>
+    </section>
+  </body>
+</html>

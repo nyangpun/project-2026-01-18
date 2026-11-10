@@ -1,0 +1,29 @@
+<!doctype html>
+<html
+  lang="ko"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{layouts/default_layout :: layout(~{::title}, ~{::section})}"
+>
+  <head>
+    <title>게시판 만들기</title>
+  </head>
+  <body>
+    <section>
+      <h1>게시판 만들기</h1>
+
+      <form th:action="@{/board/new}" th:object="${boardForm}" method="post">
+        <div>
+          <label for="gameId">게임 ID</label><br />
+          <input id="gameId" type="number" th:field="*{gameId}" />
+        </div>
+        <div>
+          <label for="title">게시판 제목</label><br />
+          <input id="title" type="text" th:field="*{title}" />
+        </div>
+        <div>
+          <button type="submit">만들기</button>
+        </div>
+      </form>
+    </section>
+  </body>
+</html>
