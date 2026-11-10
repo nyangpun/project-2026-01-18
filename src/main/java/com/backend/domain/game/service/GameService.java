@@ -92,4 +92,22 @@ public class GameService {
         return gameRepository.findAll(pageable);
     }
 
+    public Page<Game> getGamePage(int page, int size, String searchType, String keyword) {
+        if (keyword == null || keyword.isBlank()) {
+            return getGamePage(page, size);
+        }
+
+        Pageable pageable = PageRequest.of(page, size);
+        if ("tag".equals(searchType)) {
+            return gameRepository.findByTagContainingIgnoreCase(keyword, pageable);
+        }
+        if ("developer".equals(searchType)) {
+            return gameRepository.findByDeveloperContainingIgnoreCase(keyword, pageable);
+        }
+        if ("publisher".equals(searchType)) {
+            return gameRepository.findByPublisherContainingIgnoreCase(keyword, pageable);
+        }
+        return gameRepository.findByNameContainingIgnoreCase(keyword, pageable);
+    }
+
 }

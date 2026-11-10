@@ -7,6 +7,7 @@ import com.backend.domain.review.dto.ReviewDetailDto;
 import com.backend.domain.review.entity.Review;
 import com.backend.domain.review.form.ReviewForm;
 import com.backend.domain.review.service.ReviewService;
+import com.backend.domain.search.service.RecentSearchService;
 import com.backend.global.security.dto.MemberContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -27,11 +28,23 @@ public class ReviewController {
     private final ReviewService reviewService;
     private final GameService gameService;
     private final GameRepository gameRepository;
+    private final RecentSearchService recentSearchService;
 
     @GetMapping("/list")
-    public String getReviews(Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "25") int size){
-        Page<Game> gamePage = this.gameService.getGamePage(page -1, size);
+    public String getReviews(Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "25") int size,
+                             @RequestParam(required = false) String searchType, @RequestParam(required = false) String keyword,
+                             @AuthenticationPrincipal MemberContext memberContext){
+        Page<Game> gamePage = this.gameService.getGamePage(page -1, size, searchType, keyword);
         model.addAttribute("gamePage", gamePage);
+        model.addAttribute("searchType", searchType);
+        model.addAttribute("keyword", keyword);
+
+        if (memberContext != null) {
+            if (keyword != null && !keyword.isBlank()) {
+                recentSearchService.save(memberContext.getId(), searchType, keyword);
+            }
+            model.addAttribute("recentSearches", recentSearchService.findRecent(memberContext.getId()));
+        }
 
         return "review/list";
     }
