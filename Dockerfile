@@ -1,5 +1,5 @@
 # 첫 번째 스테이지: 빌드 스테이지
-FROM gradle:jdk-21-and-23-graal-jammy AS builder
+FROM gradle:8.14.3-jdk21 AS builder
 
 # 작업 디렉토리 설정
 WORKDIR /app
@@ -14,11 +14,11 @@ RUN gradle dependencies --no-daemon
 # 소스 코드 복사
 COPY src src
 
-# 애플리케이션 빌드
-RUN gradle build --no-daemon
+# 애플리케이션 빌드 (테스트는 제외)
+RUN gradle bootJar --no-daemon
 
 # 두 번째 스테이지: 실행 스테이지
-FROM ghcr.io/graalvm/jdk-community:23
+FROM eclipse-temurin:21-jre
 
 # 작업 디렉토리 설정
 WORKDIR /app

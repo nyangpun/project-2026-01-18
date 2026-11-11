@@ -1,0 +1,10 @@
+.git
+.gradle
+.idea
+build
+out
+bin
+db_dev*
+src/main/generated
+src/main/resources/application-secret.yml
+.env
