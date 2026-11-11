@@ -45,11 +45,17 @@ logging:
     org.hibernate.orm.jdbc.bind: INFO
     org.hibernate.orm.jdbc.extract: INFO
     org.springframework.transaction.interceptor: INFO
+    org.springframework.security: INFO
+    org.springframework.security.oauth2.client: INFO
+decorator:
+  datasource:
+    p6spy:
+      enable-logging: false
 custom:
   site:
     cookieDomain: "${custom.prod.cookieDomain}"
     frontUrl: "${custom.prod.frontUrl}"
-    backUrl: "${custom.prod.backUrl}"
+    backUrl: "${CUSTOM_SITE_BACKURL}"
     name: APP2
   genFile:
     dirPath: /gen

@@ -25,6 +25,7 @@ services:
       KAKAO_CLIENT_ID: ${KAKAO_CLIENT_ID}
       GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
       GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+      CUSTOM_SITE_BACKURL: ${CUSTOM_SITE_BACKURL:?CUSTOM_SITE_BACKURL is required}
     depends_on:
       db:
         condition: service_healthy
