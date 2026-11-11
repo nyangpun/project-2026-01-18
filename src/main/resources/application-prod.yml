@@ -53,8 +53,8 @@ decorator:
       enable-logging: false
 custom:
   site:
-    cookieDomain: "${custom.prod.cookieDomain}"
-    frontUrl: "${custom.prod.frontUrl}"
+    cookieDomain: "${CUSTOM_SITE_COOKIEDOMAIN}"
+    frontUrl: "${CUSTOM_SITE_FRONTURL}"
     backUrl: "${CUSTOM_SITE_BACKURL}"
     name: APP2
   genFile:
