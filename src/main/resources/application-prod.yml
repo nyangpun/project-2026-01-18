@@ -1,10 +1,8 @@
 spring:
   data:
     redis:
-      host: ${custom.prod.redis.host}
-      port: ${custom.prod.redis.port}
-      username: ${custom.prod.redis.username}
-      password: ${custom.prod.redis.password}
+      host: ${SPRING_DATA_REDIS_HOST}
+      port: ${SPRING_DATA_REDIS_PORT:6379}
   datasource:
     url: ${SPRING_DATASOURCE_URL}
     username: ${SPRING_DATASOURCE_USERNAME}

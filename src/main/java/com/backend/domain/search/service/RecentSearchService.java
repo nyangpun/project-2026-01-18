@@ -1,37 +1,31 @@
 package com.backend.domain.search.service;
 
 import com.backend.domain.search.dto.RecentSearchDto;
-import com.backend.domain.search.entity.RecentSearch;
-import com.backend.domain.search.repository.RecentSearchRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class RecentSearchService {
-    private final RecentSearchRepository recentSearchRepository;
+    private final StringRedisTemplate redisTemplate;
 
-    @Transactional
     public void save(Long userId, String searchType, String keyword) {
-        recentSearchRepository.deleteByUserIdAndSearchTypeAndKeyword(userId, searchType, keyword);
+        String key = "recent-search:" + userId;
+        String value = (searchType == null ? "" : searchType) + ":" + keyword;
 
-        RecentSearch recentSearch = RecentSearch.builder()
-                .userId(userId)
-                .searchType(searchType)
-                .keyword(keyword)
-                .build();
-        recentSearchRepository.save(recentSearch);
-
-        List<RecentSearch> list = recentSearchRepository.findByUserIdOrderByIdDesc(userId);
-        if (list.size() > 10) {
-            recentSearchRepository.deleteAll(list.subList(10, list.size()));
-        }
+        redisTemplate.opsForList().remove(key, 0, value);
+        redisTemplate.opsForList().leftPush(key, value);
+        redisTemplate.opsForList().trim(key, 0, 9);
     }
 
     public List<RecentSearchDto> findRecent(Long userId) {
-        return recentSearchRepository.findTop10ByUserIdOrderByIdDesc(userId).stream().map(RecentSearchDto::from).toList();
+        List<String> values = redisTemplate.opsForList().range("recent-search:" + userId, 0, 9);
+        return values.stream().map(value -> {
+            String[] parts = value.split(":", 2);
+            return new RecentSearchDto(parts[0].isEmpty() ? null : parts[0], parts[1]);
+        }).toList();
     }
 }
