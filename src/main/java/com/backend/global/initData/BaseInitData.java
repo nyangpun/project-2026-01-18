@@ -14,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
 @Configuration
+@Profile("dev")
 public class BaseInitData {
   private final ReviewService reviewService;
 
