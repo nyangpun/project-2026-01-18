@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: gradle
+
+      # 테스트가 secret 프로필을 읽으므로 .default를 복사해 더미 값으로 채움
+      - name: Prepare application-secret.yml
+        run: sed 's/NEED_TO_INPUT/dummy/g' src/main/resources/application-secret.yml.default > src/main/resources/application-secret.yml
+
+      - name: Build
+        run: ./gradlew build
