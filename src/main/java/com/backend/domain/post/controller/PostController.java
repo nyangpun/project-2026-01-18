@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -57,7 +58,7 @@ public class PostController {
     }
 
     model.addAttribute("post", PostDto.from(post));
-    model.addAttribute("isAuthor", memberContext != null && memberContext.getId().equals(post.getUserId()));
+    model.addAttribute("canModify", isAuthorOrAdmin(memberContext, post));
     return "post/detail";
   }
 
@@ -71,8 +72,8 @@ public class PostController {
     if (!boardId.equals(post.getBoardId())) {
       return "redirect:/board/" + post.getBoardId() + "/post/" + postId + "/modify";
     }
-    if (!memberContext.getId().equals(post.getUserId())) {
-      throw new AccessDeniedException("작성자만 수정할 수 있습니다.");
+    if (!isAuthorOrAdmin(memberContext, post)) {
+      throw new AccessDeniedException("작성자나 관리자만 수정할 수 있습니다.");
     }
 
     PostForm postForm = new PostForm();
@@ -92,8 +93,8 @@ public class PostController {
     if (post == null || !boardId.equals(post.getBoardId())) {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
-    if (!memberContext.getId().equals(post.getUserId())) {
-      throw new AccessDeniedException("작성자만 수정할 수 있습니다.");
+    if (!isAuthorOrAdmin(memberContext, post)) {
+      throw new AccessDeniedException("작성자나 관리자만 수정할 수 있습니다.");
     }
 
     postService.modify(post, postForm.getTitle(), postForm.getContent());
@@ -107,11 +108,19 @@ public class PostController {
     if (post == null || !boardId.equals(post.getBoardId())) {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
-    if (!memberContext.getId().equals(post.getUserId())) {
-      throw new AccessDeniedException("작성자만 삭제할 수 있습니다.");
+    if (!isAuthorOrAdmin(memberContext, post)) {
+      throw new AccessDeniedException("작성자나 관리자만 삭제할 수 있습니다.");
     }
 
     postService.delete(post);
     return "redirect:/board/" + boardId;
+  }
+
+  private boolean isAuthorOrAdmin(MemberContext memberContext, Post post) {
+    if (memberContext == null) {
+      return false;
+    }
+    return memberContext.getId().equals(post.getUserId())
+        || memberContext.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"));
   }
 }
