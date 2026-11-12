@@ -3,6 +3,7 @@ package com.backend.domain.game.controller;
 import com.backend.domain.game.dto.GameResponseDto;
 import com.backend.domain.game.service.GameService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,11 +15,13 @@ import java.util.List;
 public class GameController {
     private final GameService gameService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/sync")
     public String syncFromSteamSpy() {
         gameService.syncAllFromSteamSpy();
         return "redirect:/";
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/filltags")
     public String filltags() {
         gameService.filltags();
